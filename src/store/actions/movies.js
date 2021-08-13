@@ -1,6 +1,6 @@
 import axios from "../../config/api/axios"
 import { CancelToken } from "axios"
-import { GET_MOVIES, SET_LOADING } from "../constanta"
+import { GET_MOVIES, RESET_MOVIES, SET_LOADING } from "../constanta"
 let cancel
 
 export const getMovies = (payload) => async dispatch => {
@@ -16,7 +16,8 @@ export const getMovies = (payload) => async dispatch => {
     if (data) {
       dispatch({
         type: GET_MOVIES,
-        data: data.Search
+        data: data.Search,
+        hasMore: data.Response === "True" ? true : false
       })
     }
 
@@ -25,6 +26,12 @@ export const getMovies = (payload) => async dispatch => {
   } catch (err) {
     dispatch(setLoading(false))
   }
+}
+
+export const resetMovies = () => dispatch => {
+  dispatch({
+    type: RESET_MOVIES,
+  })
 }
 
 const setLoading = (loading) => dispatch => {

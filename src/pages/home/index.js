@@ -1,29 +1,41 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Header from '../../components/header/header'
 import Card from '../../components/card/card'
 import ReactLoading from 'react-loading';
 import './home.css'
-import { getMovies } from '../../store/actions/movies'
+import { getMovies, resetMovies } from '../../store/actions/movies'
 
 const Home = () => {
   const dispatch = useDispatch()
-  const { movies, loading } = useSelector(state => state.movieState)
+  const { movies, loading, hasMore } = useSelector(state => state.movieState)
   const [modalShow, setModalShow] = useState(false)
   const [keySearch, setKeySearch] = useState("")
   const [page, setPage] = useState(1)
+
+  const observe = useRef()
+  const lastMovie = useCallback(node => {
+    if (loading) return
+    if (observe.current) observe.current.disconnect()
+    observe.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        setPage(page => page + 1)
+      }
+    })
+    if (node) observe.current.observe(node)
+  }, [loading, hasMore])
 
   useEffect(() => {
     let payload = {
       keySearch,
       page
     }
-    dispatch(getMovies(payload))
+    if (keySearch !== "") dispatch(getMovies(payload))
   }, [keySearch, page])
 
   useEffect(() => {
-    console.log(loading);
-  }, [loading])
+    dispatch(resetMovies())
+  }, [keySearch])
 
   const handleSearch = (e) => {
     setKeySearch(e.target.value)
@@ -39,9 +51,17 @@ const Home = () => {
       <div className="content">
         {
           movies?.map((movie, index) => {
-            return (
-              <Card poster={movie.Poster} title={movie.Title} modalShow={modalShow} setModalShow={setModalShow} index={index} />
-            )
+            if (movies.length === index + 1) {
+              return (
+                <div ref={lastMovie}>
+                  <Card key={index} poster={movie?.Poster} title={movie?.Title} modalShow={modalShow} setModalShow={setModalShow} index={index} />
+                </div>
+              )
+            } else {
+              return (
+                <Card key={index} poster={movie?.Poster} title={movie?.Title} modalShow={modalShow} setModalShow={setModalShow} index={index} />
+              )
+            }
           })
         }
       </div>

@@ -1,4 +1,4 @@
-import { GET_MOVIES, SET_LOADING } from "../constanta"
+import { GET_MOVIES, RESET_MOVIES, SET_LOADING } from "../constanta"
 
 const initialState = {
   movies: [],
@@ -7,15 +7,20 @@ const initialState = {
 }
 
 const movieState = (state = initialState, actions) => {
-  console.log(actions);
   switch (actions.type) {
     case GET_MOVIES:
       return ({
-        ...state, movies: actions.data
+        ...state,
+        movies: state.movies.concat(actions.data),
+        hasMore: actions.hasMore
       })
     case SET_LOADING:
       return ({
         ...state, loading: actions.data
+      })
+    case RESET_MOVIES:
+      return ({
+        ...state, movies: []
       })
     default:
       return state
