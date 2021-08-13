@@ -1,53 +1,20 @@
-.card-movie {
-  display: flex;
-  flex-direction: row;
-  margin: 10px;
-  height: auto;
-  width: 40vw;
-  background-color: rgba(51, 55, 73, 0.678);
-  border-radius: 10px;
-}
-
-.box-image {
-  margin: 15px;
-  /* background-color: #fff; */
-}
-
-.box-title{
-text-align: left;
-}
-
-.poster {
-  width: 8vw;
-  cursor: zoom-in;
-}
-
-.p-20 {
-  font-size: 20px;
-  margin: 15px 0 0;
-}
-
-.link-detail {
-  color: white;
-  font-size: 15px;
-  margin-top: 20px;
-}
-
-.modal {
+.box-search{
   position: fixed;
-  z-index: 1; /* Sit on top */
-  justify-content: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(26, 26, 26, 0.808); /* Black w/ opacity */
+  top: 80px;
+  background-color: #282c34;
+  height: 70px;
+  width: 100vw;
+  align-items: center
 }
-
-/* Modal Content/Box */
-.modal-content {
-  padding: 20px;
-  margin-top: 20vh;
+.input {
+  width: 30vw;
+  height: 35px;
+  margin: 15px;
+  padding: 0 10px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+.content{
+  margin-top: 50px;
+  justify-content: center;
 }

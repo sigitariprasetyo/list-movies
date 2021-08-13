@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import "./card.css"
 
 const Card = props => {
   const { poster, title, modalShow, setModalShow, index } = props
