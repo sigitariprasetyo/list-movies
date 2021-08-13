@@ -1,0 +1,12 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  background-color: rgb(55, 57, 68);
+  height: 80px;
+  align-items: center;
+}
+
+.title{
+  font-weight: bold;
+}
