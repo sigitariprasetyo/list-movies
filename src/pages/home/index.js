@@ -68,7 +68,7 @@ const Home = () => {
         <div className="box-sugestion">
           {
             displaySugest && sugestion.map((el, i) => {
-              return <p className="sugestion-option" onClick={() => [setKeySearch(el), setDisplaySugest(false), dispatch(resetMovies())]}>{el}</p>
+              return <p key={i} className="sugestion-option" onClick={() => [setKeySearch(el), setDisplaySugest(false), dispatch(resetMovies())]}>{el}</p>
             })
           }
         </div>
@@ -78,7 +78,7 @@ const Home = () => {
           movies.length > 0 && movies?.map((movie, index) => {
             if (movies.length === index + 1) {
               return (
-                <div ref={lastMovie}>
+                <div key={index} ref={lastMovie}>
                   <Card key={index} imdbID={movie.imdbID} poster={movie?.Poster} title={movie?.Title} modalShow={modalShow} setModalShow={setModalShow} index={index} />
                 </div>
               )

@@ -12,13 +12,13 @@ const Detail = () => {
 
   useEffect(() => {
     setMovie(movies.find(movie => movie.imdbID === imdbID))
-  }, [])
+  }, [imdbID, movies])
 
   return (
     <>
       <Header title="Detail Movie" />
       <div className="box-detail">
-        <Link className="link-to-home" to="/home"> Back to Home </Link>
+        <Link className="link-to-home" to="/"> Back to Home </Link>
         <div className="movie-detail">
           <div className="box-image-detail">
             <img src={movie?.Poster} alt="img" />
