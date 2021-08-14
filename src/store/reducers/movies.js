@@ -12,7 +12,7 @@ const movieState = (state = initialState, actions) => {
       return ({
         ...state,
         movies: state.movies.concat(actions.data),
-        hasMore: actions.hasMore
+        hasMore: state.movies.length <= actions.total ? true : false
       })
     case SET_LOADING:
       return ({

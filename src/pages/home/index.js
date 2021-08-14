@@ -12,13 +12,16 @@ const Home = () => {
   const [modalShow, setModalShow] = useState(false)
   const [keySearch, setKeySearch] = useState("")
   const [page, setPage] = useState(1)
+  const [sugestion, setSugestion] = useState([])
+  const [displaySugest, setDisplaySugest] = useState(false)
+  const wrapRef = useRef(null)
 
   const observe = useRef()
   const lastMovie = useCallback(node => {
     if (loading) return
     if (observe.current) observe.current.disconnect()
     observe.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
+      if (entries[0].isIntersecting && movies.length >= 10) {
         setPage(page => page + 1)
       }
     })
@@ -34,10 +37,25 @@ const Home = () => {
   }, [keySearch, page])
 
   useEffect(() => {
-    dispatch(resetMovies())
-  }, [keySearch])
+    document.addEventListener("mousedown", handleClickOutside)
+    return (() => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (movies.length > 0) setSugestion([...new Set(movies?.map(movie => movie?.Title))])
+  }, [movies])
+
+  const handleClickOutside = e => {
+    const { current: wrap } = wrapRef
+    if (wrap && !wrap.contains(e.target)) {
+      setDisplaySugest(false)
+    }
+  }
 
   const handleSearch = (e) => {
+    dispatch(resetMovies())
     setKeySearch(e.target.value)
     setPage(1)
   }
@@ -45,21 +63,28 @@ const Home = () => {
   return (
     <>
       <Header title="List Movies from omdbAPI" />
-      <div className="box-search">
-        <input className="input" placeholder="Search movies" type="text" value={keySearch} onChange={handleSearch} />
+      <div ref={wrapRef} className="box-search" >
+        <input className="input" placeholder="Search movies" type="text" value={keySearch} onClick={() => setDisplaySugest(!displaySugest)} onChange={handleSearch} />
+        <div className="box-sugestion">
+          {
+            displaySugest && sugestion.map((el, i) => {
+              return <p className="sugestion-option" onClick={() => [setKeySearch(el), setDisplaySugest(false), dispatch(resetMovies())]}>{el}</p>
+            })
+          }
+        </div>
       </div>
       <div className="content">
         {
-          movies?.map((movie, index) => {
+          movies.length > 0 && movies?.map((movie, index) => {
             if (movies.length === index + 1) {
               return (
                 <div ref={lastMovie}>
-                  <Card key={index} poster={movie?.Poster} title={movie?.Title} modalShow={modalShow} setModalShow={setModalShow} index={index} />
+                  <Card key={index} imdbID={movie.imdbID} poster={movie?.Poster} title={movie?.Title} modalShow={modalShow} setModalShow={setModalShow} index={index} />
                 </div>
               )
             } else {
               return (
-                <Card key={index} poster={movie?.Poster} title={movie?.Title} modalShow={modalShow} setModalShow={setModalShow} index={index} />
+                <Card key={index} imdbID={movie.imdbID} poster={movie?.Poster} title={movie?.Title} modalShow={modalShow} setModalShow={setModalShow} index={index} />
               )
             }
           })

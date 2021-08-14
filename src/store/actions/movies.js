@@ -16,8 +16,8 @@ export const getMovies = (payload) => async dispatch => {
     if (data) {
       dispatch({
         type: GET_MOVIES,
-        data: data.Search,
-        hasMore: data.Response === "True" ? true : false
+        data: data.Search ? data.Search : [],
+        total: Number(data.totalResult)
       })
     }
 
@@ -28,8 +28,8 @@ export const getMovies = (payload) => async dispatch => {
   }
 }
 
-export const resetMovies = () => dispatch => {
-  dispatch({
+export const resetMovies = () => async dispatch => {
+  await dispatch({
     type: RESET_MOVIES,
   })
 }

@@ -4,17 +4,49 @@
   background-color: #282c34;
   height: 70px;
   width: 100vw;
-  align-items: center
 }
 .input {
   width: 30vw;
   height: 35px;
   margin: 15px;
-  padding: 0 10px;
+  padding:  0 10px;
   border-radius: 5px;
   font-size: 15px;
 }
 .content{
   margin-top: 50px;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+}
+
+.box-sugestion{
+  background-color: white;
+  width: 31.5vw;
+  margin-top: -15px;
+  overflow: 'scroll';
+  margin-left: 34.2vw;
+  text-align: left;
+  padding-left: 5
+}
+
+.sugestion{
+  background-color: #fff;
+  margin-top: 150px;
+  width: 30vw;
+}
+
+.sugestion-option{
+  margin: 0;
+  padding:10px;
+  padding-left: 10px;
+  height: 15px;
+  padding: 5px 0;
+  font-size: 15px;
+  color: black;
+}
+
+.sugestion-option:hover{
+  cursor: pointer;
+  background: rgb(180, 180, 180);
 }

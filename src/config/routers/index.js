@@ -15,7 +15,7 @@ const Routers = () => {
       <Header />
       <Router>
         <Switch>
-          <Route path="/detail">
+          <Route path="/detail/:imdbID">
             <Detail />
           </Route>
           <Route path="/">

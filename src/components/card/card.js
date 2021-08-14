@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import "./card.css"
 
 const Card = props => {
-  const { poster, title, modalShow, setModalShow, index } = props
+  const { imdbID, poster, title, modalShow, setModalShow, index } = props
   return (
     <>
       <div onClick={() => setModalShow(-1)} className="modal" style={{ display: modalShow === index ? 'block' : 'none' }} >
@@ -17,7 +17,7 @@ const Card = props => {
 
         <div className="box-title">
           <p className="p-20" key={index}>{title}</p>
-          <Link className="link-detail" to="/detail">Detail...</Link>
+          <Link className="link-detail" to={`/detail/${imdbID}`}>Detail...</Link>
         </div>
       </div>
     </>
