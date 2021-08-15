@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# List Movies
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project ini dibuat menggunakan Reactjs dan redux untuk state management.
+untuk data diambil dari OMDb API [http://www.omdbapi.com/](http://www.omdbapi.com/).
 
-## Available Scripts
+## Fitur
 
-In the project directory, you can run:
+1. Default list movies display dengan default key search "Batman".
+2. Search movie by keyword, aplikasi akan mengambil data dari API setelah user mengetik keyword movie yang akan di cari. Disini juga menggunakan Cancel Token dari Axios yang akan membatalkan request ketika user masih mengetik.
+3. Ifinite Scroll, saya menggunakan IntersectionObserver dan useRef untuk menyimpan node movie paling akhir. Dan aplikasi akan mengambil data untuk page selanjutnya ketika posisi window sudah sampai ke node terakhir dari list movie.
+4. Popup modal untuk poster movie. User dapat mengklik poster di list movies maka poster akan di tampilkan di dalam modal dengan ukuran asli dari poster tersebut.
+5. Page movie detail. User dapat melihat detail movie dengan klik link detail yang ada dibawah title movie didalam card list movie.
+6. Autocomplete search box. Search box akan menampilkan sugestions ketika user mengetikan keyword.
+7. Testing components. Testing menggunakan @testing-library/react dan @testing-library/jest-dom
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Bagaimana untuk menjalankan aplikasi ini?
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Clone project ini
+### `https://github.com/sigitariprasetyo/list-movies.git`
 
-### `yarn test`
+2. Masuk ke directory list-movies atau buka folder list-movies menggunakan code editor
+### `cd list-movies`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Install dependencies
+### `npm install`
 
-### `yarn build`
+4. Menjalankan aplikasi di local server
+### `npm run start`
+Perintah ini akan menjalankan aplikasi di local server yaitu di http://localhost:3000
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+5. Testing
+### `npm run test`
