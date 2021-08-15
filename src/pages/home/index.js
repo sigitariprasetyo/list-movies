@@ -10,7 +10,7 @@ const Home = () => {
   const dispatch = useDispatch()
   const { movies, loading, hasMore } = useSelector(state => state.movieState)
   const [modalShow, setModalShow] = useState(false)
-  const [keySearch, setKeySearch] = useState("")
+  const [keySearch, setKeySearch] = useState("Batman")
   const [page, setPage] = useState(1)
   const [sugestion, setSugestion] = useState([])
   const [displaySugest, setDisplaySugest] = useState(false)

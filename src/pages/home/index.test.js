@@ -12,9 +12,9 @@ describe('Home page', () => {
     expect(getByText('List Movies from omdbAPI')).toBeInTheDocument()
   })
 
-  test('it should have text input with placeholder value Search movies', () => {
+  test('it should have text input with value default Batman', () => {
     const { getAllByPlaceholderText } = render(<Provider store={store}><Router><Home /></Router></Provider>)
-    expect(getAllByPlaceholderText('Search movies')[0]).toContainHTML('<input class="input" placeholder="Search movies" type="text" value="" />')
+    expect(getAllByPlaceholderText('Search movies')[0]).toContainHTML('<input class="input" placeholder="Search movies" type="text" value="Batman" />')
   })
 
   test('it should cahange value keySearch if onchange true', () => {
